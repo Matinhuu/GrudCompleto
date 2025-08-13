@@ -83,7 +83,7 @@ export async function alterarGame(id, novosDados) {
 }
 
 
-export async function apagarGame(id) {
+export async function deletarGame(id) {
   const comando = `
     DELETE FROM jogos_video
           WHERE id = ?

@@ -1,19 +1,19 @@
 import { conection } from "../conection.js"
 
 
-export async function listarCrush() {
+export async function listarLivros() {
   const comando = `
     SELECT * 
-      FROM crush
+      FROM livros
   `
   let [reg] = await conection.query(comando);
   return reg;
 }
 
-export async function escolherCrush(id) {
+export async function escolherLivros(id) {
   const comando = `
     SELECT * 
-      FROM crush
+      FROM livros
      WHERE id = ?
   `
 
@@ -22,14 +22,14 @@ export async function escolherCrush(id) {
 }
 
 
-export async function filtrarCrush(nome) {
+export async function filtrarLivros(titulo) {
   const comando = `
     SELECT * 
-      FROM crush
-     WHERE nome like ?
+      FROM livros
+     WHERE titulo like ?
   `
 
-  let [reg] = await conection.query(comando, ['%'+nome+'%']);
+  let [reg] = await conection.query(comando, ['%'+titulo+'%']);
   return reg;
 }
 
@@ -47,53 +47,48 @@ CREATE TABLE livros (
 
 */
 
-export async function inserirCrush(novoCrush) {
+export async function inserirLivro(novoLivro) {
   const comando = `
-    INSERT INTO crush (nome, idade, genero, cidade, interesses, data_conheceu, tem_contato, nota_paixao, status_relacionamento)
-               values (?, ?, ?, ?, ?, ?, ?, ?, ?, )
+    INSERT INTO livros (titulo, autor, genero, ano_publicacao, paginas, editora, preco)
+               values (?, ?, ?, ?, ?, ?, ?)
   `
 
-  let [info] = await conection.query(comando, [novoCrush.nome, novoCrush.idade, novoCrush.genero, novoCrush.cidade, novoCrush.interesses, novoCrush.data_conheceu, novoCrush.tem_contato, novoCrush.nota_paixao, novoCrush.status_relacionamento]);
+  let [info] = await conection.query(comando, [novoLivro.titulo, novoLivro.autor, novoLivro.genero, novoLivro.ano_publicacao, novoLivro.paginas, novoLivro.editora, novoLivro.preco]);
   return info.insertId;
 }
 
 
 
-export async function alterarCrush(id, novosDados) {
+export async function alterarLivro(id, novosDados) {
   const comando = `
-    UPDATE curso
-       SET nome = ?, 
-       idade = ?, 
+    UPDATE livros
+       SET titulo = ?, 
+       autor = ?, 
        genero = ?, 
-       cidade = ?, 
-       interesses = ?, 
-       data_conheceu = ?, 
-       tem_contato = ?, 
-       nota_paixao = ?, 
-       status_relacionamento = ?
+       ano_publicacao = ?, 
+       paginas = ?, 
+       editora = ?, 
+       preco = ?
 
      WHERE id = ?
   `
 
   let [info] = await conection.query(comando, [
-    novosDados.nome,
-    novosDados.idade,
-    novosDados.carga_horaria,
+    novosDados.titulo,
+    novosDados.autor,
     novosDados.genero,
-    novosDados.cidade,
-    novosDados.interesses,
-    novosDados.data_conheceu,
-    novosDados.tem_contato,
-    novosDados.nota_paixao,
-    novosDados.status_relacionamento,
+    novosDados.ano_publicacao,
+    novosDados.paginas,
+    novosDados.editora,
+    novosDados.preco,
     id
   ])
 }
 
 
-export async function apagarCrush(id) {
+export async function deletarLivro(id) {
   const comando = `
-    DELETE FROM crush
+    DELETE FROM livros
           WHERE id = ?
   `
 
