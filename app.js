@@ -12,7 +12,7 @@ import * as time from './repositorios/timeRepository.js'
 const api = express();
 api.use(express.json());
 
-//TABELA CURSO
+//TABELA CURSO 1
 
 api.get('/curso', async (req, resp) => {
   let registros = await curso.listarCursos();
@@ -50,7 +50,7 @@ api.delete('/curso/:id', async (req, resp) => {
   resp.send();
 })
 
-//TABELA TIMES
+//TABELA TIMES 2
 
 api.get('/time', async (req, resp) => {
   let registros = await time.listarTimes();
@@ -88,7 +88,7 @@ api.delete('/time/:id', async (req, resp) => {
   resp.send();
 })
 
-//TABELA FUNCIONARIOS
+//TABELA FUNCIONARIOS 3
 
 api.get('/func', async (req, resp) => {
   let registros = await func.listarFunc();
@@ -126,7 +126,7 @@ api.delete('/func/:id', async (req, resp) => {
   resp.send();
 })
 
-//TABELA FILMES
+//TABELA FILMES 4
 
 api.get('/filme', async (req, resp) => {
   let registros = await film.listarFilmes();
@@ -164,7 +164,7 @@ api.delete('/filme/:id', async (req, resp) => {
   resp.send();
 })
 
-//TABELA RESTAURANTES
+//TABELA RESTAURANTES 5
 
 api.get('/rest', async (req, resp) => {
   let registros = await rest.listarRest();
@@ -202,7 +202,7 @@ api.delete('/rest/:id', async (req, resp) => {
   resp.send();
 })
 
-//TABELA LIVROS
+//TABELA LIVROS 6
 
 api.get('/book', async (req, resp) => {
   let registros = await book.listarLivros();
@@ -240,26 +240,26 @@ api.delete('/book/:id', async (req, resp) => {
   resp.send();
 })
 
-//TABELA GAME
+//TABELA GAME 7
 
 api.get('/game', async (req, resp) => {
-  let registros = await listar();
+  let registros = await game.listarGame();
   resp.send(registros);
 })
 api.get('/game/filtrar', async (req, resp) => {
-  let titulo = req.query.nome;
-  let registros = await book.filtrarLivros(titulo);
+  let nome = req.query.nome;
+  let registros = await game.filtrarGame(nome);
   resp.send(registros);
 })
 api.get('/game/:id', async (req, resp) => {
   let id = req.params.id;
-  let registros = await book.escolherLivros(id);
+  let registros = await game.escolherGame(id);
   resp.send(registros);
 })
 api.post('/game', async (req, resp) => {
-  let novoLivro = req.body;
+  let novoGame = req.body;
   
-  let id = await book.inserirLivro(novoLivro);
+  let id = await game.inserirGame(novoGame);
   
   resp.send({
     novoId: id
@@ -269,12 +269,127 @@ api.put('/game/:id', async (req, resp) => {
   let id = req.params.id;
   let novosDados = req.body;
 
-  await book.alterarLivro(id, novosDados);
+  await game.alterarGame(id, novosDados);
   resp.send();
 })
 api.delete('/game/:id', async (req, resp) => {
   let id = req.params.id;
-  await book.deletarLivro(id);
+  await game.deletarGame(id);
+  resp.send();
+})
+
+
+//TABELA APPLE 8
+
+api.get('/apple', async (req, resp) => {
+  let registros = await apple.listarApple();
+  resp.send(registros);
+})
+api.get('/apple/filtrar', async (req, resp) => {
+  let nome = req.query.nome;
+  let registros = await apple.filtrarApple(nome);
+  resp.send(registros);
+})
+api.get('/apple/:id', async (req, resp) => {
+  let id = req.params.id;
+  let registros = await apple.escolherApple(id);
+  resp.send(registros);
+})
+api.post('/apple', async (req, resp) => {
+  let novoApple = req.body;
+  
+  let id = await apple.inserirApple(novoApple);
+  
+  resp.send({
+    novoId: id
+  })
+})
+api.put('/apple/:id', async (req, resp) => {
+  let id = req.params.id;
+  let novosDados = req.body;
+
+  await apple.alterarApple(id, novosDados);
+  resp.send();
+})
+api.delete('/apple/:id', async (req, resp) => {
+  let id = req.params.id;
+  await apple.apagarApple(id);
+  resp.send();
+})
+
+//TABELA CRUSH 9
+
+api.get('/crush', async (req, resp) => {
+  let registros = await crush.listarCrush();
+  resp.send(registros);
+})
+api.get('/crush/filtrar', async (req, resp) => {
+  let nome = req.query.nome;
+  let registros = await crush.filtrarCrush(nome);
+  resp.send(registros);
+})
+api.get('/crush/:id', async (req, resp) => {
+  let id = req.params.id;
+  let registros = await crush.escolherCrush(id);
+  resp.send(registros);
+})
+api.post('/crush', async (req, resp) => {
+  let novoGame = req.body;
+  
+  let id = await crush.inserirCrush(novoGame);
+  
+  resp.send({
+    novoId: id
+  })
+})
+api.put('/crush/:id', async (req, resp) => {
+  let id = req.params.id;
+  let novosDados = req.body;
+
+  await crush.alterarCrush(id, novosDados);
+  resp.send();
+})
+api.delete('/crush/:id', async (req, resp) => {
+  let id = req.params.id;
+  await crush.apagarCrush(id);
+  resp.send();
+})
+
+//TABELA CURSO ONLINE 10
+
+api.get('/con', async (req, resp) => {
+  let registros = await CON.listarCON();
+  resp.send(registros);
+})
+api.get('/con/filtrar', async (req, resp) => {
+  let nome = req.query.nome;
+  let registros = await CON.filtrarCON(nome);
+  resp.send(registros);
+})
+api.get('/con/:id', async (req, resp) => {
+  let id = req.params.id;
+  let registros = await CON.escolherCON(id);
+  resp.send(registros);
+})
+api.post('/con', async (req, resp) => {
+  let novoCON = req.body;
+  
+  let id = await CON.inserirCON(novoCON);
+  
+  resp.send({
+    novoId: id
+  })
+})
+api.put('/con/:id', async (req, resp) => {
+  let id = req.params.id;
+  let novosDados = req.body;
+
+  await CON.alterarCON(id, novosDados);
+  resp.send();
+})
+api.delete('/con/:id', async (req, resp) => {
+  let id = req.params.id;
+  await CON.apagarCON(id);
   resp.send();
 })
 
