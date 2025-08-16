@@ -1,4 +1,4 @@
-import { conection } from "../conection.js";
+import { conection } from "../repositories/conection.js";
 
 export async function listarApple() {
   const comando = `Select * from apple;`

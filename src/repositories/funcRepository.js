@@ -1,5 +1,4 @@
-import { conection } from "../conection.js"
-
+import { conection } from "../repositories/conection.js";
 
 export async function listarFunc() {
   const comando = `
